@@ -1,7 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Sleeper;
 
@@ -21,15 +18,20 @@ public class BadCodeExample {
         // Verify that results list contains 10 elements
         List<WebElement> searchResults = browser.findElements(By.cssSelector("div.srg div.g"));
         System.out.println("Results count: "+searchResults.size());
+        if (searchResults.size()<5) {
+            System.out.println("Results count "+ searchResults.size()+" is incorrect");
+        }else{
+            System.out.println("Results count "+ searchResults.size()+" is correct");
 
         // Verify that each result item contains searchterm
         for (WebElement searchResult: searchResults) {
            String searchResultText = searchResult.getText();
-           System.out.println(searchResultText);
-           if (searchResults.size()<10) {
-               System.out.println("Results count "+ searchResults.size()+" is incorrect");
+           if (searchResultText.contains("Selenium")) {
+               System.out.println("Searchterm found");
            }else{
-               System.out.println("Results count "+ searchResults.size()+" is correct");
+               System.out.println("Searchterm is not found");
+           }
+
            }
         }
 
