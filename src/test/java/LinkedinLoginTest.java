@@ -24,9 +24,18 @@ public class LinkedinLoginTest {
 
         WebElement Titleafterlogin = browser.findElement(By.xpath("//*[@id=\"ember4608\"]"));
         Assert.assertEquals(Titleafterlogin.getText(), "Добро пожаловать, lned!");
-        WebElement URLafterlogin = browser.findElement(By.xpath("//*[@id=\"ember4608\"]"));
+        WebElement specificWebElement = browser.findElement(By.xpath("//*[@id=\"feed-tab-icon\"]"));
+        
         Thread.sleep(3000);
 
+        //Home Task #3:
+        //Create successfulLoginTest()
+        //- Register separate test account on Linkedin
+        //- Use negativeLoginTest() as an example
+        //- In your positive test you need to have 3 assertions:
+        //Assert page URL after login;
+        //Assert page Title after login;
+        //Assert some specific WebElement is displayed after login
     }
     @Test
     public void negativeLoginTest () throws InterruptedException {
