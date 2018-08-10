@@ -9,12 +9,14 @@ import org.testng.annotations.Test;
 
 public class LinkedinLoginTest {
     WebDriver browser;
+    LinkedinLoginPage linkedinLoginPage;
 
     @BeforeMethod
-    public void beforeMethod(){
-        System.setProperty("webdriver.gecko.driver","/Users/liubomyrned/Downloads/geckodriver");
+    public void beforeMethod() {
+        System.setProperty("webdriver.gecko.driver", "/Users/liubomyrned/Downloads/geckodriver");
         browser = new FirefoxDriver();
-        browser.get ("https://www.linkedin.com/");
+        browser.get("https://www.linkedin.com/");
+        linkedinLoginPage = new LinkedinLoginPage(browser);
 
     }
     @AfterMethod
@@ -23,37 +25,17 @@ public class LinkedinLoginTest {
     }
 
     @Test
-    public void successfullLoginTest () throws InterruptedException {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
+    public void successfullLoginTest () {
         linkedinLoginPage.login("liubomyrned21@gmail.com", "VCM-TuY-EVZ-r4p");
-        Thread.sleep(3000);
-        String pageTitle = browser.getTitle();
-        String pageUrl = browser.getCurrentUrl();
-        //WebElement profileNavigationItem = browser.findElement(By.xpath("//*[@id='profile-nav-item']"));
-        Thread.sleep(5000);
-        Assert.assertEquals(pageTitle, "LinkedIn", "Home page Title is wrong");
-        Assert.assertEquals(pageUrl, "https://www.linkedin.com/feed/", "Home page URL is wrong");
-        Assert.assertTrue(linkedinLoginPage.isProfileNavigationItemPresent(), "'profileNavigationItem' is not displayed on Home page.");
-        Thread.sleep(3000);
+        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(browser);
+        Assert.assertTrue(linkedinHomePage.isLoaded(),"Home page is loaded.");
         }
 
     @Test
-    public void negativeLoginTest () throws InterruptedException {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
+    public void negativeLoginTest () {
         linkedinLoginPage.login("tph", "tph2");
-        Thread.sleep(3000);
-        WebElement alertBox = browser.findElement(By.xpath("//*[@role='alert']"));
-        Assert.assertEquals(alertBox.getText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert box has incorrect message");
-        Thread.sleep(3000);
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
+        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.", "Alert box has incorrect message");
+
     }
 }
-
-//Home Task #4:
-//Update successfulLoginTest() to use LinkedinHomePage object.
-//- Create new page object class called LinkedinHomePage.class
-//- Move profileNavidationItem into this new class
-//- Add LinkedinHomePage constructor with browser parameter
-//- Add initElements() method to initialise profoleNavigationItem
-//- Add boolean method isProfileNavigationItemDisplayed() in a new class.
-//- Use new LinkedinHomePage in successfulLoginTest()
-//- Use isProfileNavigationItemDisplayed() method in last Assert.

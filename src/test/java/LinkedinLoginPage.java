@@ -5,18 +5,18 @@ import org.openqa.selenium.WebElement;
 
 public class LinkedinLoginPage {
 
-    WebDriver browser;
-    WebElement userEmailField;
-    WebElement userPasswordField;
-    WebElement signInButton;
-    WebElement profileNavigationItem ;
+    private WebDriver browser;
+    private WebElement userEmailField;
+    private WebElement userPasswordField;
+    private WebElement signInButton;
+    //private WebElement profileNavigationItem ;
 
 
     public LinkedinLoginPage(WebDriver browser){
         this.browser = browser;
         initElements();
     }
-    public void initElements(){
+    private void initElements(){
         userEmailField = browser.findElement(By.xpath("//*[@id=\"login-email\"]"));
         userPasswordField = browser.findElement(By.xpath("//*[@id=\"login-password\"]"));
         signInButton = browser.findElement(By.xpath("//*[@id=\"login-submit\"]"));
@@ -27,11 +27,16 @@ public class LinkedinLoginPage {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPass);
         signInButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public boolean isProfileNavigationItemPresent(){
-        profileNavigationItem = browser.findElement(By.xpath("//*[@id='profile-nav-item']"));
-        return profileNavigationItem.isDisplayed();
+    //public boolean isProfileNavigationItemPresent(){
+        //profileNavigationItem = browser.findElement(By.xpath("//*[@id='profile-nav-item']"));
+        //return profileNavigationItem.isDisplayed();
     }
     //Home Task #4:
     //Update successfulLoginTest() to use LinkedinHomePage object.
@@ -42,5 +47,3 @@ public class LinkedinLoginPage {
     //- Add boolean method isProfileNavigationItemDisplayed() in a new class.
     //- Use new LinkedinHomePage in successfulLoginTest()
     //- Use isProfileNavigationItemDisplayed() method in last Assert.
-
-}
