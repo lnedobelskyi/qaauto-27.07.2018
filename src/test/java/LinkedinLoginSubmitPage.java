@@ -18,7 +18,7 @@ public class LinkedinLoginSubmitPage {
 
     }
 
-    private void initElements(){//это метод который вызывает переменные(либо параметры)
+    private void initElements(){
         alertBox = browser.findElement(By.xpath("//*[@role='alert']"));
         userEmailValidationText = browser.findElement(By.xpath("//span[@id='session_key-login-error']"));
         userPasswordValidationText = browser.findElement(By.xpath("//span[@id='session_password-login-error']"));
@@ -49,5 +49,8 @@ public class LinkedinLoginSubmitPage {
 
     public String getPasswordValidationText() {
         return userPasswordValidationText.getText();
+    }
+
+    public String getUserPasswordValidationText() {return userPasswordValidationText.getText();
     }
 }
