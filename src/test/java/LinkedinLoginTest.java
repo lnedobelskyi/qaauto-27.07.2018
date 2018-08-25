@@ -26,8 +26,8 @@ public class LinkedinLoginTest {
     @DataProvider
     public Object[][] validFieldsCombination() {
         return new Object[][]{
-                {"m.dimchik.test@gmail.com", "welcome123"},
-                {"M.Dimchik.Test@gmail.com", "welcome123"},
+                {"liubomyrned21@gmail.com", "VCM-TuY-EVZ-r4p"},
+                {"Liubomyrned21@gmail.com", "VCM-TuY-EVZ-r4p"},
         };
     }
 
@@ -65,12 +65,25 @@ public class LinkedinLoginTest {
     @Test(dataProvider = "invalidDataFieldsCombination")
     public void validateShortUserEmailAndPassword (String userEmail, String userPass, String userEmailValidationText, String userPasswordValidationText) throws InterruptedException {
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.loginReturnLoginSubmitPage(userEmail, userPass);
+        Thread.sleep(3000);
         Assert.assertTrue(linkedinLoginSubmitPage.isLoaded(), "User is not on LoginSubmit page");
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.",
                 "Alert box has incorrect message");
-        Assert.assertEquals(linkedinLoginSubmitPage.getUserEmailValidationText(), userEmailValidationText,
+        Assert.assertEquals(linkedinLoginSubmitPage.getUserEmailValidationText(), "There were one or more errors in your submission. Please correct the marked fields below.",
                 "userEmail field has wrong validation message text");
         Assert.assertEquals(linkedinLoginSubmitPage.getUserPasswordValidationText(), userPasswordValidationText, "userEmail field has wrong validation message text");
 
     }
 }
+
+    //Home Task #7:
+//  1. Update LinkedinHomePage and LinkedinLoginSubmit page classes using PageFactory pattern (as it's done for LinkedinLoginPage class)
+//2. Using PageObject and PageFactory patterns implement new Test scenario in a separate test class:
+//- Open login page
+//- Verify login page is loaded
+//- Login with valid credentials
+//- Verify home page is loaded
+//- Search for 'hr' Searchterm
+//- Verify Search page is loaded
+//- Verify 10 results displayed on search page
+//- Verify each result item contains searchterm

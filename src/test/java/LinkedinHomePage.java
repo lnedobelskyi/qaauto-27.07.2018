@@ -1,33 +1,33 @@
-import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class LinkedinHomePage {
-
-        private WebDriver browser;
-        WebElement profileNavigationItem;
-
-    public LinkedinHomePage(WebDriver browser){
+public class LinkedinHomePage extends BasePage {
+    @FindBy(xpath = "//*[@id='profile-nav-item']")
+    private WebElement profileNavigationItem;
+    @FindBy(xpath = "//input[@placeholder='Search' and @role]")
+    private WebElement searchField;
+    public LinkedinHomePage(WebDriver browser) {
         this.browser = browser;
-        initElements();
+
+
+        PageFactory.initElements(browser, this);
     }
-    private void initElements(){
-        profileNavigationItem = browser.findElement(By.xpath("//*[@id='profile-nav-item']"));
-
-    }
-
-    public String getCurrentPageTitle(){
-        return browser.getTitle();
-
-    }
-    public String getCurrentPageURL(){
-        return browser.getCurrentUrl();
-
-    }
-
     public boolean isLoaded() {
         return profileNavigationItem.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn")
-                && getCurrentPageURL().contains("/feed/");
+                && getCurrentPageUrl().contains("/feed/");
+    }
+    public LinkedinSearchPage search(String searchTerm) {
+        searchField.sendKeys(searchTerm);
+        searchField.sendKeys(Keys.ENTER);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new LinkedinSearchPage(browser);
     }
 }
