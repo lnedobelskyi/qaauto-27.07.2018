@@ -8,16 +8,20 @@ import org.testng.annotations.Test;
 public class LinkedinSearchTest {
     WebDriver browser;
     LinkedinLoginPage linkedinLoginPage;
+
     @BeforeMethod
     public void beforeMethod() {
+        System.setProperty("webdriver.gecko.driver","/Users/liubomyrned/Downloads/geckodriver");
         browser = new FirefoxDriver();
         browser.get("https://www.linkedin.com/");
         linkedinLoginPage = new LinkedinLoginPage(browser);
     }
+
     @AfterMethod
     public void afterMethod() {
         browser.close();
     }
+
     @Test
     public void basicSearchTest() {
         LinkedinHomePage linkedinHomePage = linkedinLoginPage.loginReturnHomePage(

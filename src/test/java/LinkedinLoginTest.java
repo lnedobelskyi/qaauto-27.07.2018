@@ -39,19 +39,18 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded");
     }
 
-
     @DataProvider
     public Object[][] emptyFieldsCombination () {
         return new Object[][]{
                 {"", ""},
-                {"", "Password123"},
-                {"someone@domail.com", ""},
+                {"", "VCM-TuY-EVZ-r4p"},
+                {"Liubomyrned21@gmail.com", ""},
         };
     }
     @Test(dataProvider = "emptyFieldsCombination")
     public void validateEmptyUserEmailAndUserPassword (String userEmail, String userPass){
         linkedinLoginPage.loginReturnLoginPage(userEmail, userPass);
-        Assert.assertTrue(linkedinLoginPage.isLoaded(), "User is not on linkedinLoginPage ");
+        Assert.assertTrue(linkedinLoginPage.isLoaded(), "Login page is not loaded.");
     }
 
 
@@ -74,16 +73,14 @@ public class LinkedinLoginTest {
         Assert.assertEquals(linkedinLoginSubmitPage.getUserPasswordValidationText(), userPasswordValidationText, "userEmail field has wrong validation message text");
 
     }
+
 }
 
-    //Home Task #7:
-//  1. Update LinkedinHomePage and LinkedinLoginSubmit page classes using PageFactory pattern (as it's done for LinkedinLoginPage class)
-//2. Using PageObject and PageFactory patterns implement new Test scenario in a separate test class:
-//- Open login page
-//- Verify login page is loaded
-//- Login with valid credentials
-//- Verify home page is loaded
-//- Search for 'hr' Searchterm
-//- Verify Search page is loaded
-//- Verify 10 results displayed on search page
-//- Verify each result item contains searchterm
+    /*Home Task #8:
+        Add test for Reset Password
+        - explore Reset Password scenario manually before automation
+        - create test scenario with all necessary page objects
+        - Put sleep for few minutes in place where test should get password recovery link from email (While test is sleeping you'll need to get a link from email manually and navigate to that link in Browser that was opened by test so that after sleep Test could proceed with next steps)
+        - You test scenario should end up logged in with new password on Home page
+
+        Note: Use PageObject and PageFactory patterns. Avoid using any bad practices.*/
