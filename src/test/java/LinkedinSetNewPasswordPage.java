@@ -3,7 +3,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LinkedinSetNewPasswordPage extends BasePage{
+public class LinkedinSetNewPasswordPage extends BasePage {
     @FindBy(xpath = "//button[@id='resend-url']")
     private WebElement resendLinkButton;
 
