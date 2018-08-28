@@ -1,7 +1,9 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class LinkedinResetPasswordTest {
     WebDriver browser;
@@ -20,15 +22,20 @@ public class LinkedinResetPasswordTest {
         browser.close();
     }
 
+    @Test
+    public void successfulResetPasswordTest() {
+        Assert.assertTrue(linkedinLoginPage.isLoaded(), "LoginPage is not loaded.");
+
+        LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage = linkedinLoginPage.clickOnForgotPasswordLink();
+        Assert.assertTrue(linkedinRequestPasswordResetPage.isLoaded(), "RequestPasswordResetPage is not loaded.");
+
+        LinkedinPasswordResetSubmitPage linkedinPasswordResetSubmitPage = linkedinRequestPasswordResetPage.findAccount("liubomyrned21@gmail.com");
+        Assert.assertTrue(linkedinPasswordResetSubmitPage.isLoaded(), "PasswordResetSubmitPage is not loaded.");
+
+        //Navigate to URL from email manually
+        LinkedinSetNewPasswordPage linkedinSetNewPasswordPage = linkedinPasswordResetSubmitPage.navigateToLinkFromEmail();
+        Assert.assertTrue(linkedinSetNewPasswordPage.isLoaded(), "SetNewPasswordPage is not loaded.");
+
+    }
 
 }
-
-
-/*Home Task #8:
-        Add test for Reset Password
-        - explore Reset Password scenario manually before automation
-        - create test scenario with all necessary page objects
-        - Put sleep for few minutes in place where test should get password recovery link from email (While test is sleeping you'll need to get a link from email manually and navigate to that link in Browser that was opened by test so that after sleep Test could proceed with next steps)
-        - You test scenario should end up logged in with new password on Home page
-
-        Note: Use PageObject and PageFactory patterns. Avoid using any bad practices.*/
