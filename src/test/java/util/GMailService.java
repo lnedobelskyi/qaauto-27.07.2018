@@ -40,8 +40,8 @@ import java.util.concurrent.Executors;
          * Default util.GMailService constructor with predefined user/pass credentials
          */
         public GMailService(){
-            this.user = "postoltest@gmail.com";
-            this.pass = "q12345678T";
+            this.user = "liubomyr21@gmail.com";
+            this.pass = "Tesla12345";
         }
 
         /**

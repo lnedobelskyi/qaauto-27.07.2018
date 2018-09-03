@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,8 +13,6 @@ public class LinkedinHomePage extends BasePage {
     private WebElement searchField;
     public LinkedinHomePage(WebDriver browser) {
         this.browser = browser;
-
-
         PageFactory.initElements(browser, this);
     }
     public boolean isLoaded() {

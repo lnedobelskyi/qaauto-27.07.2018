@@ -1,9 +1,15 @@
+package test;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import page.LinkedinLoginPage;
+import page.LinkedinPasswordResetSubmitPage;
+import page.LinkedinRequestPasswordResetPage;
+import page.LinkedinSetNewPasswordPage;
 
 public class LinkedinResetPasswordTest {
     WebDriver browser;
@@ -23,7 +29,7 @@ public class LinkedinResetPasswordTest {
     }
 
     @Test
-    public void successfulResetPasswordTest() {
+    public void successfulResetPasswordTest() throws InterruptedException {
         Assert.assertTrue(linkedinLoginPage.isLoaded(), "LoginPage is not loaded.");
 
         LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage = linkedinLoginPage.clickOnForgotPasswordLink();
@@ -32,10 +38,7 @@ public class LinkedinResetPasswordTest {
         LinkedinPasswordResetSubmitPage linkedinPasswordResetSubmitPage = linkedinRequestPasswordResetPage.findAccount("liubomyrned21@gmail.com");
         Assert.assertTrue(linkedinPasswordResetSubmitPage.isLoaded(), "PasswordResetSubmitPage is not loaded.");
 
-        //Navigate to URL from email manually
         LinkedinSetNewPasswordPage linkedinSetNewPasswordPage = linkedinPasswordResetSubmitPage.navigateToLinkFromEmail();
         Assert.assertTrue(linkedinSetNewPasswordPage.isLoaded(), "SetNewPasswordPage is not loaded.");
-
     }
-
 }
